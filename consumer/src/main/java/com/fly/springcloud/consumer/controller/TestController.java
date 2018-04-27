@@ -1,5 +1,6 @@
 package com.fly.springcloud.consumer.controller;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,10 +19,15 @@ public class TestController {
     @Autowired
     private RestTemplate restTemplate;
 
+    @HystrixCommand(fallbackMethod = "fallBack")
     @ResponseBody
     @GetMapping("/hello")
     public String test(){
         return restTemplate.getForObject("http://MICROSERVICE-PROVIDER-HELLO/test",String.class);
+    }
+
+    public String fallBack(){
+        return "fall back";
     }
 
 }
