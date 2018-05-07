@@ -6,6 +6,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>serice-feign</module>
+        <module>service-zuul</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
